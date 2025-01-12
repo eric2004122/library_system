@@ -1,0 +1,250 @@
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc; /* 更柔和的背景色 */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%; /* Reduce width on small screens */
+    max-width: 1200px; /* Added max-width on large screens */
+    margin: 30px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    position: relative;
+     box-sizing: border-box; /*Added box-sizing */
+}
+
+.login-container {
+    width: 90%; /* Reduce width on small screens */
+    max-width: 400px; /* Added max-width on large screens */
+    margin: 80px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    box-sizing: border-box; /*Added box-sizing */
+}
+h1 {
+  font-size: 2.2em;
+   text-align: center;
+   margin-bottom: 25px;
+  color: #3498db;
+}
+
+h2 {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+     color: #3498db;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"]
+{
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06); /* Add inset shadow */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus
+{
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+select {
+     width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+    font-size: 1em;
+    background-color: white;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06); /* Add inset shadow */
+}
+
+select:focus {
+      border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+button {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out; /* Added transition */
+    font-size: 1em;
+     margin-bottom: 15px;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);  /* Added animation */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add hover shadow */
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
+    transition: background-color 0.2s ease-in-out;
+     display: flex;
+     justify-content: space-between;
+    align-items: center;
+}
+
+li:hover {
+    background-color: #f9f9f9;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #2980b9;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container > p {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+#book-list li, #borrowed-book-list li {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+     display: flex;
+     justify-content: space-between;
+    align-items: center;
+}
+
+#book-list li:hover, #borrowed-book-list li:hover {
+    background-color: #f9f9f9;
+}
+
+
+#book-list li:last-child, #borrowed-book-list li:last-child {
+    border-bottom: none;
+}
+/* Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 15px;
+    position: relative;
+     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out; /* Added transition */
+}
+
+.close:hover,
+.close:focus {
+    color: #333;
+    text-decoration: none;
+     transform: scale(1.1); /* Add animation */
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
+.borrowed-book-container {
+    display: flex; /* Set container to flex display */
+    justify-content: space-between; /* Distribute space between sections */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+.borrowed-book-section {
+    flex-basis: calc(50% - 10px); /* Set basis for each section, minus gap */
+    padding: 10px;
+    box-sizing: border-box; /* Ensure padding is within width */
+}
+
+@media (max-width: 768px) {
+    .borrowed-book-container {
+        flex-direction: column; /* Stack sections on smaller screens */
+    }
+
+    .borrowed-book-section {
+        flex-basis: 100%; /* Make sections full width on small screens */
+    }
+    h1 {
+        font-size: 2em; /* Smaller font size on small screens */
+      }
+
+}
