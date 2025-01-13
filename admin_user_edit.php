@@ -30,6 +30,7 @@ $user = $result->fetch_assoc();
            <input type="number" name="borrow_limit" placeholder="借閱上限" value="<?php echo $user['borrow_limit'] ?>" required> <br>
             <input type="number" name="borrow_period" placeholder="借閱期限" value="<?php echo $user['borrow_period'] ?>" required> <br>
             <button type="submit">更新</button>
+             <button onclick="location.href='admin_dashboard.php'">返回</button>
         </form>
     </div>
 </body>

@@ -30,6 +30,7 @@ $category = $result->fetch_assoc();
             <input type="text" name="name" placeholder="類別名稱" value="<?php echo $category['name']; ?>" required> <br>
                <input type="number" name="borrow_period" placeholder="借閱期限" value="<?php echo $category['borrow_period']; ?>" required> <br>
             <button type="submit">更新</button>
+             <button onclick="location.href='admin_categories.php'">返回</button>
         </form>
     </div>
 </body>

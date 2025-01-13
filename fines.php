@@ -29,9 +29,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>管理使用者罰款</h1>
         <ul id="fine-list">
             </ul>
+         <button onclick="location.href='admin_dashboard.php'">返回</button>
+             <div id="messageModal" class="modal">
+            <div class="modal-content message">
+                <span class="close">×</span>
+                <p id="modalMessage"></p>
+            </div>
+        </div>
     </div>
-     <script>
+    <script>
     const fineList = document.getElementById('fine-list');
+        const messageModal = document.getElementById('messageModal');
+          const modalMessage = document.getElementById('modalMessage');
     async function fetchFines() {
               const response = await fetch('api/getFines.php');
              const fines = await response.json();
@@ -59,12 +68,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (response.ok) {
                  fineList.innerHTML = "";
                  fetchFines();
-               alert("繳納成功");
+               showModalMessage("繳納成功");
              } else {
-                 alert('繳納失敗');
+               showModalMessage('繳納失敗');
             }
         }
         fetchFines();
+         function showModalMessage(message) {
+              modalMessage.textContent = message;
+              messageModal.style.display = "flex";
+            }
+           var span = document.getElementsByClassName("close");
+            for (const sp of span) {
+               sp.onclick = function() {
+                   if (sp.closest(".modal"))
+                     {
+                        sp.closest(".modal").style.display = "none";
+                    }
+                }
+        }
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target.className === "modal")
+       {
+         event.target.style.display = "none";
+        }
+}
     </script>
 </body>
 </html>

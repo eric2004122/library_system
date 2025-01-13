@@ -50,6 +50,7 @@ $book = $result->fetch_assoc();
               </select><br>
             <input type="number" name="stock" placeholder="庫存量" value="<?php echo $book['stock']; ?>" required><br>
             <button type="submit">更新</button>
+             <button onclick="location.href='admin_dashboard.php'">返回</button>
         </form>
     </div>
 </body>

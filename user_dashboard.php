@@ -14,12 +14,14 @@ if (!isLoggedIn() || isAdmin()) {
 <body>
     <div class="container">
         <h1>歡迎, <?php echo $_SESSION['username']; ?></h1>
-         <p><a href="logout.php">登出</a></p>
-        <h2>可借閱書籍</h2>
-          <div style="margin-bottom: 10px;">
-        <input type="text" id="bookSearch" placeholder="搜尋書名/作者">
+        <p><a href="logout.php">登出</a></p>
+         <div class="user-top-section">
+        <div style="margin-bottom: 10px;">
+            <input type="text" id="bookSearch" placeholder="搜尋書名/作者">
         </div>
-        <ul id="book-list">
+       </div>
+        <h2>可借閱書籍</h2>
+        <ul id="book-list" class="card-list">
         </ul>
 
         <div class="borrowed-book-container">
@@ -35,13 +37,20 @@ if (!isLoggedIn() || isAdmin()) {
             </div>
         </div>
           <button onclick="location.href='borrow_history.php'">查看借閱紀錄</button>
+              <div id="messageModal" class="modal">
+            <div class="modal-content message">
+                <span class="close">×</span>
+                <p id="modalMessage"></p>
+            </div>
+        </div>
     </div>
- <script>
+    <script>
     const bookList = document.getElementById('book-list');
     const borrowedBookListReturned = document.getElementById('borrowed-book-list-returned');
     const borrowedBookListUnreturned = document.getElementById('borrowed-book-list-unreturned');
     const bookSearchInput = document.getElementById('bookSearch');
-
+        const messageModal = document.getElementById('messageModal');
+          const modalMessage = document.getElementById('modalMessage');
     let allBooks = [];
         async function fetchBooks() {
             const response = await fetch('api/getBooks.php');
@@ -53,19 +62,21 @@ if (!isLoggedIn() || isAdmin()) {
         function updateBookList(books) {
             bookList.innerHTML = "";
                books.forEach(book => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${book.title} by ${book.author} (庫存: ${book.stock}) (狀態: ${book.borrow_status ?? '在架上'})`;
-                if(book.stock > 0) {
-                  const borrowBtn = document.createElement('button');
+                 const listItem = document.createElement('li');
+                 listItem.classList.add('card');
+                   const cardBody = document.createElement('div');
+                   cardBody.classList.add('card-body');
+                cardBody.textContent = `${book.title} by ${book.author} (庫存: ${book.stock}) (狀態: ${book.borrow_status ?? '在架上'})`;
+                 if(book.stock > 0) {
+                   const borrowBtn = document.createElement('button');
                   borrowBtn.textContent = '借閱';
-                  borrowBtn.onclick = () => borrowBook(book.id);
-                   listItem.appendChild(borrowBtn);
-                }
-
+                   borrowBtn.onclick = () => borrowBook(book.id);
+                    cardBody.appendChild(borrowBtn);
+                   }
+                 listItem.appendChild(cardBody);
                 bookList.appendChild(listItem);
             });
         }
-
          bookSearchInput.addEventListener('input', function() {
               const searchTerm = bookSearchInput.value.toLowerCase();
              const filteredBooks = allBooks.filter(book => {
@@ -102,9 +113,6 @@ if (!isLoggedIn() || isAdmin()) {
 
             });
         }
-
-
-
         async function returnBook(borrowId, bookId) {
             const response = await fetch('api/returnBook.php', {
                  method: 'POST',
@@ -118,9 +126,9 @@ if (!isLoggedIn() || isAdmin()) {
                  borrowedBookListUnreturned.innerHTML = "";
                  fetchBooks();
                  fetchBorrowedBooks();
-               alert("歸還成功");
+                showModalMessage("歸還成功");
              } else {
-                 alert('歸還失敗');
+                  showModalMessage('歸還失敗');
             }
          }
 
@@ -137,14 +145,34 @@ if (!isLoggedIn() || isAdmin()) {
                   borrowedBookListUnreturned.innerHTML = "";
                   fetchBooks();
                   fetchBorrowedBooks();
-              alert("借閱成功");
+               showModalMessage("借閱成功");
              } else {
-                 alert('借閱失敗');
+                showModalMessage('借閱失敗');
             }
          }
 
         fetchBooks();
          fetchBorrowedBooks();
+           function showModalMessage(message) {
+              modalMessage.textContent = message;
+              messageModal.style.display = "flex";
+            }
+   var span = document.getElementsByClassName("close");
+for (const sp of span) {
+ sp.onclick = function() {
+    if (sp.closest(".modal"))
+    {
+      sp.closest(".modal").style.display = "none";
+    }
+ }
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target.className === "modal")
+    {
+         event.target.style.display = "none";
+    }
+}
     </script>
 </body>
 </html>

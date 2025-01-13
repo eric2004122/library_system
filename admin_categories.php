@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              <input type="text" name="name" placeholder="類別名稱" required> <br>
                <input type="number" name="borrow_period" placeholder="借閱期限" required> <br>
             <button type="submit">新增</button>
+               <button onclick="location.href='admin_dashboard.php'">返回</button>
         </form>
          <h2>編輯書籍類別</h2>
            <ul id="category-list">

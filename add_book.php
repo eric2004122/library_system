@@ -38,7 +38,37 @@ if (!isAdmin()) {
               </select><br>
             <input type="number" name="stock" placeholder="庫存量" required><br>
             <button type="submit">新增</button>
+           <button onclick="location.href='admin_dashboard.php'">返回</button>
         </form>
+        <div id="messageModal" class="modal">
+            <div class="modal-content message">
+                <span class="close">×</span>
+                <p id="modalMessage"></p>
+            </div>
+        </div>
     </div>
+      <script>
+          const messageModal = document.getElementById('messageModal');
+          const modalMessage = document.getElementById('modalMessage');
+         var span = document.getElementsByClassName("close");
+          for (const sp of span) {
+           sp.onclick = function() {
+              if (sp.closest(".modal"))
+               {
+                sp.closest(".modal").style.display = "none";
+              }
+           }
+         }
+     window.onclick = function(event) {
+        if (event.target.className === "modal")
+            {
+              event.target.style.display = "none";
+            }
+        }
+           function showModalMessage(message) {
+              modalMessage.textContent = message;
+              messageModal.style.display = "flex";
+            }
+ </script>
 </body>
 </html>
